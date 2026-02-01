@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dossier BPJEPS – Présentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --violet:#7c3aed;
+      --vert:#22c55e;
+      --cyan:#06b6d4;
+      --orange:#f59e0b;
+      --rouge:#ef4444;
+
+      --fond:#0f172a;
+      --carte:rgba(255,255,255,.08);
+      --carte2:rgba(255,255,255,.05);
+      --bord:rgba(255,255,255,.15);
+      --txt:rgba(255,255,255,.95);
+      --muted:rgba(255,255,255,.7);
+      --radius:18px;
+      --shadow: 0 16px 50px rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(circle at top right, rgba(6,182,212,.25), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(34,197,94,.18), transparent 55%),
+        var(--fond);
+      color:var(--txt);
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:30px 16px 80px;
+    }
+
+    header{
+      padding:22px;
+      border:1px solid var(--bord);
+      border-radius:var(--radius);
+      background: linear-gradient(135deg, rgba(124,58,237,.18), rgba(6,182,212,.10));
+      box-shadow: var(--shadow);
+    }
+
+    h1{ margin:0 0 8px; font-size: clamp(26px, 3.2vw, 40px); }
+    .sub{ margin:0; color:var(--muted); }
+
+    section{
+      background:var(--carte);
+      border:1px solid var(--bord);
+      border-radius:var(--radius);
+      padding:22px;
+      margin-top:18px;
+      box-shadow: var(--shadow);
+    }
+
+    .accent-violet{border-left:6px solid var(--violet);}
+    .accent-vert{border-left:6px solid var(--vert);}
+    .accent-cyan{border-left:6px solid var(--cyan);}
+    .accent-orange{border-left:6px solid var(--orange);}
+    .accent-rouge{border-left:6px solid var(--rouge);}
+
+    /* Accordion sommaire */
+    .accordion{
+      background: var(--carte2);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    details{
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    details:first-child{
+      border-top:none;
+    }
+
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-weight:700;
+      letter-spacing:.02em;
+      background: rgba(255,255,255,.04);
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .sum-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .tag{
+      width:12px;
+      height:12px;
+      border-radius:4px;
+      flex-shrink:0;
+      box-shadow: 0 0 0 4px rgba(255,255,255,.05);
+    }
+
+    .chev{
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(255,255,255,.8);
+      border-bottom: 2px solid rgba(255,255,255,.8);
+      transform: rotate(45deg);
+      transition: transform .15s ease;
+      flex-shrink:0;
+      opacity:.9;
+    }
+    details[open] .chev{
+      transform: rotate(225deg);
+    }
+
+    .acc-body{
+      padding: 10px 12px 14px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .links{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+    .links a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--txt);
+      text-decoration:none;
+      transition: transform .08s ease, background .12s ease;
+    }
+    .links a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+    }
+
+    .back{
+      display:inline-block;
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .back:hover{ text-decoration: underline; }
+
+    p{ margin: 0; color: var(--muted); }
+      .logo{
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #b3122d, #ffd166);
+      box-shadow: var(--shadow);
+      display:grid;
+      place-items:center;
+      font-size: 18px;
+}
+  </style>
+</head>
+
+<body>
+<div class="container" id="top">
+
+  <header>
+    <div class="logo">🎭</div>
+    <h1>Dossier BPJEPS – Projet d’animation</h1>  
+    <p class="sub">Version web – 1 page avec sommaire déroulant</p>
+  </header>
+
+  <!-- SOMMAIRE DÉROULANT -->
+  <section class="accent-violet">
+    <h2 style="margin:0 0 12px; text-transform:uppercase; letter-spacing:.05em;">Sommaire</h2>
+
+    <div class="accordion">
+      <!-- Bloc 1 : Présentation -->
+      <details open>
+        <summary>
+          <span class="sum-left">
+            <span class="tag" style="background:var(--violet)"></span>
+            Présentation
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="acc-body">
+          <ul class="links">
+            <li><a href="#presentation-personnelle"><span class="tag" style="background:var(--violet)"></span>Présentation personnelle</a></li>
+            <li><a href="#organisateur-structure"><span class="tag" style="background:var(--cyan)"></span>Organisateur et structure</a></li>
+            <li><a href="#role-valeurs-missions"><span class="tag" style="background:var(--vert)"></span>Votre rôle, vos valeurs, vos missions</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Bloc 2 : Constat -->
+      <details>
+        <summary>
+          <span class="sum-left">
+            <span class="tag" style="background:var(--orange)"></span>
+            Groupe & constat
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="acc-body">
+          <ul class="links">
+            <li><a href="#groupe-constat"><span class="tag" style="background:var(--orange)"></span>Votre groupe et le constat</a></li>
+            <li><a href="#exemple-constat"><span class="tag" style="background:var(--rouge)"></span>Exemple de constat</a></li>
+            <li><a href="#schema-bulles"><span class="tag" style="background:var(--cyan)"></span>Le schéma des bulles</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Bloc 3 : Pédagogie -->
+      <details>
+        <summary>
+          <span class="sum-left">
+            <span class="tag" style="background:var(--vert)"></span>
+            Pédagogie & cycles
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="acc-body">
+          <ul class="links">
+            <li><a href="#methodes-pedagogiques"><span class="tag" style="background:var(--vert)"></span>Méthodes pédagogiques</a></li>
+            <li><a href="#construction-cycles"><span class="tag" style="background:var(--violet)"></span>La construction des cycles</a></li>
+            <li><a href="#presentation-activites"><span class="tag" style="background:var(--orange)"></span>Présentation des activités</a></li>
+            <li><a href="#objectifs-cycles"><span class="tag" style="background:var(--vert)"></span>Objectifs des cycles</a></li>
+            <li><a href="#tableau-objectifs"><span class="tag" style="background:var(--cyan)"></span>Tableau des objectifs</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Bloc 4 : Les cycles -->
+      <details>
+        <summary>
+          <span class="sum-left">
+            <span class="tag" style="background:var(--cyan)"></span>
+            Les 3 cycles (6 séances)
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="acc-body">
+          <ul class="links">
+            <li><a href="#cycle-1"><span class="tag" style="background:var(--violet)"></span>1er cycle : 6 séances</a></li>
+            <li><a href="#cycle-2"><span class="tag" style="background:var(--cyan)"></span>2e cycle : 6 séances</a></li>
+            <li><a href="#cycle-3"><span class="tag" style="background:var(--rouge)"></span>3e cycle : 6 séances</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Bloc 5 : Conclusion & oral -->
+      <details>
+        <summary>
+          <span class="sum-left">
+            <span class="tag" style="background:var(--orange)"></span>
+            Conclusion & oral
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="acc-body">
+          <ul class="links">
+            <li><a href="#auto-evaluation"><span class="tag" style="background:var(--vert)"></span>Auto-évaluation</a></li>
+            <li><a href="#conclusion"><span class="tag" style="background:var(--orange)"></span>Conclusion</a></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- SECTIONS -->
+  <section id="presentation-personnelle" class="accent-violet">
+    <h3>Présentation personnelle</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="organisateur-structure" class="accent-cyan">
+    <h3>Organisateur et structure</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="role-valeurs-missions" class="accent-vert">
+    <h3>Votre rôle, vos valeurs, vos missions</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="groupe-constat" class="accent-orange">
+    <h3>Votre groupe et le constat</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="exemple-constat" class="accent-rouge">
+    <h3>Exemple de constat</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="schema-bulles" class="accent-cyan">
+    <h3>Le schéma des bulles</h3>
+    <p>À compléter (image ou schéma).</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="methodes-pedagogiques" class="accent-vert">
+    <h3>Méthodes pédagogiques</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="construction-cycles" class="accent-violet">
+    <h3>La construction des cycles</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="presentation-activites" class="accent-orange">
+    <h3>Présentation des activités</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="objectifs-cycles" class="accent-vert">
+    <h3>Objectifs des cycles</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="tableau-objectifs" class="accent-cyan">
+    <h3>Tableau des objectifs</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="cycle-1" class="accent-violet">
+    <h3>1er cycle : 6 séances</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="cycle-2" class="accent-cyan">
+    <h3>2e cycle : 6 séances</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="cycle-3" class="accent-rouge">
+    <h3>3e cycle : 6 séances</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="auto-evaluation" class="accent-vert">
+    <h3>Auto-évaluation</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+  <section id="conclusion" class="accent-orange">
+    <h3>Conclusion</h3>
+    <p>À compléter.</p>
+    <a class="back" href="#top">↑ Retour sommaire</a>
+  </section>
+
+ 
+
+</div>
+</body>
+</html>
