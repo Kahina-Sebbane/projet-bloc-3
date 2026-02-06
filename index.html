@@ -21,9 +21,14 @@
       --muted:rgba(255,255,255,.7);
       --radius:18px;
       --shadow: 0 16px 50px rgba(0,0,0,.35);
+
+      /* ✅ espacement global (tu ajustes ici si besoin) */
+      --sec-gap: 12px;
+      --sec-pad: 18px;
     }
 
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: system-ui, Arial, sans-serif;
@@ -34,12 +39,13 @@
         var(--fond);
       color:var(--txt);
       line-height:1.6;
+      overflow-x:hidden;
     }
 
     .container{
       max-width:1100px;
       margin:auto;
-      padding:30px 16px 80px;
+      padding: 22px 16px 60px;
     }
 
     header{
@@ -57,9 +63,10 @@
       background:var(--carte);
       border:1px solid var(--bord);
       border-radius:var(--radius);
-      padding:22px;
-      margin-top:18px;
+      padding: var(--sec-pad);
+      margin-top: var(--sec-gap);
       box-shadow: var(--shadow);
+      scroll-margin-top: 88px;
     }
 
     .accent-violet{border-left:6px solid var(--violet);}
@@ -68,6 +75,20 @@
     .accent-orange{border-left:6px solid var(--orange);}
     .accent-rouge{border-left:6px solid var(--rouge);}
 
+    /* ✅ manquants : card + list (tu les utilises partout) */
+    .card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li{ margin: 4px 0; }
+
     /* Accordion sommaire */
     .accordion{
       background: var(--carte2);
@@ -75,18 +96,13 @@
       border-radius: 16px;
       overflow: hidden;
     }
-
-    details{
-      border-top: 1px solid rgba(255,255,255,.12);
-    }
-    details:first-child{
-      border-top:none;
-    }
+    details{ border-top: 1px solid rgba(255,255,255,.12); }
+    details:first-child{ border-top:none; }
 
     summary{
       cursor:pointer;
       list-style:none;
-      padding: 14px 14px;
+      padding: 10px 12px; /* ✅ plus compact */
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -95,6 +111,7 @@
       letter-spacing:.02em;
       background: rgba(255,255,255,.04);
       user-select:none;
+      font-size: 13px; /* ✅ plus compact */
     }
     summary::-webkit-details-marker{ display:none; }
 
@@ -106,16 +123,16 @@
     }
 
     .tag{
-      width:12px;
-      height:12px;
-      border-radius:4px;
+      width:10px;
+      height:10px;
+      border-radius:3px;
       flex-shrink:0;
-      box-shadow: 0 0 0 4px rgba(255,255,255,.05);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.05);
     }
 
     .chev{
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-right: 2px solid rgba(255,255,255,.8);
       border-bottom: 2px solid rgba(255,255,255,.8);
       transform: rotate(45deg);
@@ -123,19 +140,17 @@
       flex-shrink:0;
       opacity:.9;
     }
-    details[open] .chev{
-      transform: rotate(225deg);
-    }
+    details[open] .chev{ transform: rotate(225deg); }
 
     .acc-body{
-      padding: 10px 12px 14px;
+      padding: 8px 10px 10px;
       background: rgba(255,255,255,.03);
     }
 
     .links{
       display:grid;
       grid-template-columns: 1fr;
-      gap:10px;
+      gap: 6px; /* ✅ plus compact */
       margin:0;
       padding:0;
       list-style:none;
@@ -145,13 +160,14 @@
       display:flex;
       align-items:center;
       gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
+      padding: 6px 8px; /* ✅ plus compact */
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       color: var(--txt);
       text-decoration:none;
       transition: transform .08s ease, background .12s ease;
+      font-size: 12.5px;
     }
     .links a:hover{
       transform: translateY(-1px);
@@ -168,7 +184,8 @@
     .back:hover{ text-decoration: underline; }
 
     p{ margin: 0; color: var(--muted); }
-      .logo{
+
+    .logo{
       width: 40px;
       height: 40px;
       border-radius: 14px;
@@ -177,216 +194,769 @@
       display:grid;
       place-items:center;
       font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .text-block p{
+      margin-bottom: 14px;
+      line-height: 1.65;
+    }
+
+    .presentation-inline{
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .photo-inline{
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+    @media (max-width: 700px){
+      .presentation-inline{ align-items: center; flex-direction: column; }
+    }
+
+    .structure-inline{
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .photo-structure-inline{
+      width: 120px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+    @media (max-width: 700px){
+      .structure-inline{ flex-direction: column; align-items: flex-start; }
+    }
+
+    /* --- Sticky sommaire (menu déroulant) --- */
+    .topbar{
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+      margin: 12px 0 10px;
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      background:
+        linear-gradient(135deg, rgba(124,58,237,.12), rgba(6,182,212,.08)),
+        rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .toc-pill{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--txt);
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+
+    .select-wrap{ position: relative; width: 100%; max-width: 620px; }
+    .select{
+      width: 100%;
+      appearance:none;
+      padding: 10px 40px 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--txt);
+      outline:none;
+      font-weight: 700;
+    }
+    .select option{ color:#111; }
+    .select-wrap:after{
+      content:"";
+      position:absolute;
+      right: 14px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(255,255,255,.75);
+      border-bottom: 2px solid rgba(255,255,255,.75);
+      transform: translateY(-55%) rotate(45deg);
+      pointer-events:none;
+      opacity:.95;
+    }
+    .hint{ color: var(--muted); font-size: 13px; white-space:nowrap; padding-right: 6px; }
+    @media (max-width: 760px){
+      .topbar-inner{ flex-direction:column; align-items:stretch; }
+      .hint{ white-space: normal; }
+      .select-wrap{ max-width: 100%; }
+    }
+
+    /* --- Tableau objectifs --- */
+    .table-wrap{
+      overflow:auto;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 12px 34px rgba(0,0,0,.25);
+      margin-top: 12px;
+    }
+    table{
+      width:100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+    th, td{
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      vertical-align: top;
+    }
+    th{
+      position: sticky;
+      top: 0;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,.18), rgba(6,182,212,.12)),
+        rgba(15,23,42,.85);
+      color: var(--txt);
+      text-align:left;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    td{ color: var(--muted); }
+    tbody tr{ background: rgba(255,255,255,.02); }
+    tbody tr:hover{ background: rgba(255,255,255,.05); }
+
+    .cycle-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--txt);
+      font-weight: 800;
+      white-space:nowrap;
+    }
+    .cycle-dot{
+      width: 10px; height: 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 0 4px rgba(255,255,255,.05);
+    }
+    .dot-violet{ background: var(--violet); }
+    .dot-cyan{ background: var(--cyan); }
+    .dot-rouge{ background: var(--rouge); }
+
+    /* 🔵 Pastilles BLEU CLAIR uniquement dans Organisateur & structure */
+    #organisateur-structure .tag{ background: var(--cyan) !important; }
+
+    /* ====== PAGED.JS (PDF only) ====== */
+    @page { size: A4; margin: 20mm 18mm 25mm 18mm; }
+    @page {
+      @bottom-center {
+        content: "Page " counter(page) " / " counter(pages);
+        font-size: 11px;
+        color: #666;
+      }
+    }
+    @media print{
+      .topbar{ position: static; margin: 0 0 10px; }
+      section{ break-inside: avoid; }
+      #presentation-personnelle,
+      #groupe-constat,
+      #methodes-pedagogiques,
+      #cycle-1,
+      #auto-evaluation{
+        break-before: page;
+        page-break-before: always;
+      }
+    }
+
+    #pdf-toc{
+      margin: 8px 0 12px;
+      font-size: 13px;
+      color: var(--txt);
+    }
+
+    /* ✅ Sommaire accordéon encore plus compact (page 1 PDF) */
+#toc-accordion{
+  padding: 12px;
 }
+
+#toc-accordion h2{
+  margin: 0 0 6px !important;
+  font-size: 14px;
+  letter-spacing: .08em;
+}
+
+#toc-accordion .accordion summary{
+  padding: 6px 9px;
+  font-size: 12.5px;
+}
+
+#toc-accordion .acc-body{
+  padding: 6px 9px 8px;
+}
+
+#toc-accordion .links{
+  gap: 5px;
+}
+
+#toc-accordion .links a{
+  padding: 5px 7px;
+  font-size: 12px;
+  border-radius: 11px;
+}
+
+#toc-accordion .tag{
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.05);
+}
+
+/* En PDF : encore un poil plus serré */
+@media print{
+  #toc-accordion{ padding: 10px; }
+  #toc-accordion .accordion summary{ padding: 5px 8px; font-size: 12px; }
+  #toc-accordion .links a{ padding: 4px 6px; font-size: 11.5px; }
+}
+
+/* ✅ Par défaut (web) : cache le sommaire PDF auto */
+#pdf-toc{ display:none; }
+
+/* ✅ En mode Paged.js (PDF) : on l'affiche */
+.pagedjs_pages #pdf-toc{ display:block; }
+
   </style>
 </head>
 
 <body>
-<div class="container" id="top">
+  <div class="container" id="top">
 
-  <header>
-    <div class="logo">🎭</div>
-    <h1>Dossier BPJEPS – Projet d’animation</h1>  
-    <p class="sub">Version web – 1 page avec sommaire déroulant</p>
-  </header>
+    <header>
+      <div class="logo">🎭</div>
+      <h1>Dossier BPJEPS – Projet d’animation</h1>
+      <p class="sub">Version web – 1 page avec sommaire déroulant</p>
+    </header>
 
-  <!-- SOMMAIRE DÉROULANT -->
-  <section class="accent-violet">
-    <h2 style="margin:0 0 12px; text-transform:uppercase; letter-spacing:.05em;">Sommaire</h2>
+    <!-- (Optionnel) si tu as déjà ton sticky sommaire, garde-le ici -->
+    <!-- Sinon, ignore -->
 
-    <div class="accordion">
-      <!-- Bloc 1 : Présentation -->
-      <details open>
-        <summary>
-          <span class="sum-left">
-            <span class="tag" style="background:var(--violet)"></span>
-            Présentation
-          </span>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <ul class="links">
-            <li><a href="#presentation-personnelle"><span class="tag" style="background:var(--violet)"></span>Présentation personnelle</a></li>
-            <li><a href="#organisateur-structure"><span class="tag" style="background:var(--cyan)"></span>Organisateur et structure</a></li>
-            <li><a href="#role-valeurs-missions"><span class="tag" style="background:var(--vert)"></span>Votre rôle, vos valeurs, vos missions</a></li>
-          </ul>
+    <!-- SOMMAIRE ACCORDÉON -->
+    <section id="toc-accordion" class="accent-violet">
+      <h2 style="text-transform:uppercase;">Sommaire</h2>
+      <div id="pdf-toc"></div>
+
+      <div class="accordion">
+        <details open>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--violet)"></span>
+              Présentation
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="acc-body">
+            <ul class="links">
+              <li><a href="#presentation-personnelle"><span class="tag" style="background:var(--violet)"></span>Présentation personnelle  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#organisateur-structure"><span class="tag" style="background:var(--cyan)"></span>Organisateur et structure  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#role-valeurs-missions"><span class="tag" style="background:var(--vert)"></span>Rôle / valeurs / missions  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--orange)"></span>
+              Groupe & constat
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="acc-body">
+            <ul class="links">
+              <li><a href="#groupe-constat"><span class="tag" style="background:var(--orange)"></span>Groupe et constat  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#exemple-constat"><span class="tag" style="background:var(--rouge)"></span>Exemple de constat  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#schema-bulles"><span class="tag" style="background:var(--cyan)"></span>Schéma des bulles  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--vert)"></span>
+              Pédagogie & cycles
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="acc-body">
+            <ul class="links">
+              <li><a href="#methodes-pedagogiques"><span class="tag" style="background:var(--vert)"></span>Méthodes pédagogiques  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#construction-cycles"><span class="tag" style="background:var(--violet)"></span>Construction des cycles  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#presentation-activites"><span class="tag" style="background:var(--orange)"></span>Présentation des activités  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#tableau-objectifs"><span class="tag" style="background:var(--cyan)"></span>Tableau des objectifs  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--cyan)"></span>
+              Cycles
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="acc-body">
+            <ul class="links">
+              <li><a href="#cycle-1"><span class="tag" style="background:var(--violet)"></span>Cycle 1  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#cycle-2"><span class="tag" style="background:var(--cyan)"></span>Cycle 2  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#cycle-3"><span class="tag" style="background:var(--rouge)"></span>Cycle 3  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--orange)"></span>
+              Conclusion
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="acc-body">
+            <ul class="links">
+              <li><a href="#auto-evaluation"><span class="tag" style="background:var(--vert)"></span>Auto-évaluation  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+              <li><a href="#conclusion"><span class="tag" style="background:var(--orange)"></span>Conclusion  <span class="toc-page" style="margin-left:auto;opacity:.7;font-size:12px;">p.__</span></a></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- SECTIONS -->
+    <section id="presentation-personnelle" class="accent-violet">
+      <h3>Présentation personnelle</h3>
+
+      <div class="presentation-inline">
+        <img
+          src="assets/photo-abeille.jpg"
+          alt="Animatrice en situation professionnelle"
+          class="photo-inline"
+        >
+        <div class="text-block">
+          <p>
+            Animatrice engagée et investie dans le champ de l’éducation et de l’animation, j’ai construit mon parcours
+            autour d’une volonté constante : <strong>donner du sens aux actions menées auprès des enfants et des équipes</strong>,
+            en favorisant un cadre sécurisant, coopératif et bienveillant.
+          </p>
+
+          <p>
+            Mon parcours professionnel débute dans le domaine du <strong>développement web</strong>, où j’ai acquis des compétences solides
+            en organisation, en rigueur et en gestion de projets. Cette première expérience m’a permis de développer
+            une capacité d’analyse, d’anticipation et de structuration, compétences que je mobilise aujourd’hui
+            pleinement dans mes fonctions d’animatrice.
+          </p>
+
+          <p>
+            Par la suite, mon <strong>service civique en ludothèque</strong> a marqué un tournant décisif. J’y ai découvert le jeu comme
+            <strong>outil éducatif et de médiation</strong>, favorisant l’autonomie, la coopération et le lien social.
+          </p>
+
+          <p>
+            En complément de mon expérience de terrain, je me suis <strong>formée à la communication non violente (CNV)</strong>,
+            afin de renforcer ma posture éducative et relationnelle et de mieux accompagner l’expression des émotions
+            et la gestion des conflits au quotidien.
+          </p>
+
+          <p>
+            J’ai ensuite évolué en tant qu’<strong>animatrice</strong>, rôle dans lequel je m’investis pleinement. Je conçois et anime
+            des activités adaptées aux publics accueillis, en veillant à leur sécurité physique et affective.
+            Très rapidement, j’ai ressenti le besoin <strong>d’aller au-delà de l’animation directe</strong>, en m’impliquant davantage
+            dans l’organisation, la coordination et la réflexion pédagogique, et en prenant naturellement des
+            responsabilités au sein de l’équipe.
+          </p>
+
+          <p>
+            Cette implication <strong>m’a amenée à réfléchir personnellement à une évolution vers des fonctions de direction</strong>,
+            par envie de porter des projets éducatifs à plus long terme, d’accompagner les équipes et de participer
+            activement aux choix pédagogiques et organisationnels. <strong>Les encouragements de plusieurs directeurs et
+            directrices</strong>, qui ont reconnu ma capacité à prendre des responsabilités et à avoir une vision globale du
+            fonctionnement d’une structure, sont venus confirmer et renforcer cette orientation.
+          </p>
+
+          <p>
+            Aujourd’hui, mon projet professionnel s’inscrit dans cette dynamique : continuer à me former, à évoluer
+            et à m’engager, avec l’objectif de devenir directrice, afin de contribuer à la construction de projets
+            pédagogiques cohérents, porteurs de sens et adaptés aux besoins des enfants comme des équipes.
+          </p>
         </div>
-      </details>
+      </div>
 
-      <!-- Bloc 2 : Constat -->
-      <details>
-        <summary>
-          <span class="sum-left">
-            <span class="tag" style="background:var(--orange)"></span>
-            Groupe & constat
-          </span>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <ul class="links">
-            <li><a href="#groupe-constat"><span class="tag" style="background:var(--orange)"></span>Votre groupe et le constat</a></li>
-            <li><a href="#exemple-constat"><span class="tag" style="background:var(--rouge)"></span>Exemple de constat</a></li>
-            <li><a href="#schema-bulles"><span class="tag" style="background:var(--cyan)"></span>Le schéma des bulles</a></li>
-          </ul>
-        </div>
-      </details>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
 
-      <!-- Bloc 3 : Pédagogie -->
-      <details>
-        <summary>
-          <span class="sum-left">
-            <span class="tag" style="background:var(--vert)"></span>
-            Pédagogie & cycles
-          </span>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <ul class="links">
-            <li><a href="#methodes-pedagogiques"><span class="tag" style="background:var(--vert)"></span>Méthodes pédagogiques</a></li>
-            <li><a href="#construction-cycles"><span class="tag" style="background:var(--violet)"></span>La construction des cycles</a></li>
-            <li><a href="#presentation-activites"><span class="tag" style="background:var(--orange)"></span>Présentation des activités</a></li>
-            <li><a href="#objectifs-cycles"><span class="tag" style="background:var(--vert)"></span>Objectifs des cycles</a></li>
-            <li><a href="#tableau-objectifs"><span class="tag" style="background:var(--cyan)"></span>Tableau des objectifs</a></li>
-          </ul>
-        </div>
-      </details>
+    <section id="organisateur-structure" class="accent-cyan">
+      <h3>Organisateur et structure</h3>
 
-      <!-- Bloc 4 : Les cycles -->
-      <details>
-        <summary>
-          <span class="sum-left">
-            <span class="tag" style="background:var(--cyan)"></span>
-            Les 3 cycles (6 séances)
-          </span>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <ul class="links">
-            <li><a href="#cycle-1"><span class="tag" style="background:var(--violet)"></span>1er cycle : 6 séances</a></li>
-            <li><a href="#cycle-2"><span class="tag" style="background:var(--cyan)"></span>2e cycle : 6 séances</a></li>
-            <li><a href="#cycle-3"><span class="tag" style="background:var(--rouge)"></span>3e cycle : 6 séances</a></li>
-          </ul>
-        </div>
-      </details>
+      <!-- STRUCTURE D’ACCUEIL -->
+      <div style="margin-top:14px;" class="accordion">
+        <details open>
+          <summary>
+            <span class="sum-left">
+              <span class="tag"></span>
+              Structure d’accueil – La Boissière
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
 
-      <!-- Bloc 5 : Conclusion & oral -->
-      <details>
-        <summary>
-          <span class="sum-left">
-            <span class="tag" style="background:var(--orange)"></span>
-            Conclusion & oral
-          </span>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <ul class="links">
-            <li><a href="#auto-evaluation"><span class="tag" style="background:var(--vert)"></span>Auto-évaluation</a></li>
-            <li><a href="#conclusion"><span class="tag" style="background:var(--orange)"></span>Conclusion</a></li>
-          </ul>
-        </div>
-      </details>
-    </div>
-  </section>
+          <div class="acc-body">
+            <div class="card">
+              <div class="structure-inline">
+                <img
+                  src="assets/boissiere-structure.jpg"
+                  alt="Bâtiment de la structure d’accueil de La Boissière"
+                  class="photo-structure-inline"
+                >
 
-  <!-- SECTIONS -->
-  <section id="presentation-personnelle" class="accent-violet">
-    <h3>Présentation personnelle</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+                <div class="text-block">
+                  <p>
+                    La Mairie de La Boissière a confié à l’association <strong>Vacances Évasion</strong> l’organisation et l’encadrement
+                    des temps périscolaires et extrascolaires depuis le <strong>29 août 2024</strong>.
+                  </p>
+                  <p>
+                    Intervention : matin, midi, soir, mercredis + 1ère semaine de chaque période de vacances. Ouverture estivale en juillet,
+                    fermeture en août. Fermeture pendant les vacances de Noël.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+      <!-- /STRUCTURE D’ACCUEIL -->
 
-  <section id="organisateur-structure" class="accent-cyan">
-    <h3>Organisateur et structure</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+      <!-- RESSOURCES -->
+      <div style="margin-top:14px;" class="accordion">
+        <details open>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--orange)"></span>
+              Ressources matérielles
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
 
-  <section id="role-valeurs-missions" class="accent-vert">
-    <h3>Votre rôle, vos valeurs, vos missions</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+          <div class="acc-body">
+            <div class="card" style="margin:0 0 10px;">
+              <h4 style="margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                <span class="tag" style="background:var(--cyan)"></span>
+                Mise à disposition par la mairie (hors vacances)
+              </h4>
+              <ul class="list">
+                <li>1 salle de classe (rez-de-chaussée)</li>
+                <li>1 salle d’activité</li>
+                <li>Sanitaires</li>
+                <li>Restaurant scolaire</li>
+                <li>Local personnel</li>
+                <li>Cour et plateau sportif</li>
+                <li>Jardin public</li>
+                <li>Bibliothèque</li>
+              </ul>
+            </div>
 
-  <section id="groupe-constat" class="accent-orange">
-    <h3>Votre groupe et le constat</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+            <div class="card" style="margin:0 0 10px;">
+              <h4 style="margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                <span class="tag" style="background:var(--vert)"></span>
+                Mise à disposition pendant les vacances
+              </h4>
+              <ul class="list">
+                <li>Rez-de-chaussée de l’école maternelle</li>
+                <li>Garderie</li>
+                <li>Classe GS/CP utilisée comme dortoir</li>
+                <li>Classe CE1/CM2 utilisée comme infirmerie</li>
+                <li>Sanitaires maternelles et élémentaires (garçons / filles)</li>
+              </ul>
+            </div>
 
-  <section id="exemple-constat" class="accent-rouge">
-    <h3>Exemple de constat</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+            <div class="card">
+              <h4 style="margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                <span class="tag" style="background:var(--violet)"></span>
+                Locaux et équipements complémentaires
+              </h4>
+              <ul class="list">
+                <li>Un local de stockage du matériel</li>
+                <li>Le restaurant scolaire</li>
+                <li>Le mobilier de l’école</li>
+                <li>La salle polyvalente des Troubadours (si besoins spécifiques)</li>
+                <li>Un bureau en mairie</li>
+                <li>Un mini-bus 9 places</li>
+              </ul>
+            </div>
+          </div>
+        </details>
 
-  <section id="schema-bulles" class="accent-cyan">
-    <h3>Le schéma des bulles</h3>
-    <p>À compléter (image ou schéma).</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+        <details>
+          <summary>
+            <span class="sum-left">
+              <span class="tag" style="background:var(--vert)"></span>
+              Ressources humaines
+            </span>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
 
-  <section id="methodes-pedagogiques" class="accent-vert">
-    <h3>Méthodes pédagogiques</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+          <div class="acc-body">
+            <div class="card" style="margin:0 0 10px;">
+              <h4 style="margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                <span class="tag" style="background:var(--cyan)"></span>
+                Équipe d’animation (ALP / ALSH)
+              </h4>
 
-  <section id="construction-cycles" class="accent-violet">
-    <h3>La construction des cycles</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+              <ul class="list">
+                <li><strong>Valcasara Géraldine</strong> — Animatrice ALP/ALSH (BAFA, CAP Petite Enfance)</li>
+                <li><strong>Da Cruz Vincent</strong> — Animateur ALP/ALSH (BAFA, CAP métiers de l’animation)</li>
+                <li><strong>Sebbane Kahina</strong> — Animatrice ALP/ALSH, stagiaire BPJEPS ASEC</li>
+                <li><strong>Carpinelli Lina</strong> — Animatrice ALP/ALSH (non diplômée)</li>
+                <li><strong>Guilhem Vézinet</strong> — Directeur ALP/ALSH (BPJEPS LTP, CQP ALS, BAFA)</li>
+              </ul>
+            </div>
 
-  <section id="presentation-activites" class="accent-orange">
-    <h3>Présentation des activités</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+            <div class="card">
+              <h4 style="margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                <span class="tag" style="background:var(--orange)"></span>
+                Renfort sur les temps périscolaires (surveillance)
+              </h4>
+              <ul class="list">
+                <li><strong>Brun Corine</strong> — Agent de restauration (ALP mairie)</li>
+                <li><strong>Escudier Nathalie</strong> — Agent polyvalent (ALP, non diplômée)</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+      <!-- /RESSOURCES -->
 
-  <section id="objectifs-cycles" class="accent-vert">
-    <h3>Objectifs des cycles</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
 
-  <section id="tableau-objectifs" class="accent-cyan">
-    <h3>Tableau des objectifs</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+    <section id="role-valeurs-missions" class="accent-vert">
+      <h3>Votre rôle, vos valeurs, vos missions</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
 
-  <section id="cycle-1" class="accent-violet">
-    <h3>1er cycle : 6 séances</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+    <section id="groupe-constat" class="accent-orange">
+      <h3>Votre groupe et le constat</h3>
 
-  <section id="cycle-2" class="accent-cyan">
-    <h3>2e cycle : 6 séances</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+      <div class="card">
+        <p style="margin:0 0 12px;">
+          Dans le cadre de mon projet, j’ai fait le choix de travailler avec le public
+          <strong>CM1–CM2</strong>. Ce choix fait directement suite au constat de terrain réalisé
+          sur la structure : cette tranche d’âge est davantage concernée par les situations
+          de conflits, qu’il s’agisse de tensions verbales, de difficultés de communication
+          ou de gestion des émotions au sein du groupe.
+        </p>
 
-  <section id="cycle-3" class="accent-rouge">
-    <h3>3e cycle : 6 séances</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+        <p style="margin:0 0 10px;">
+          Les enfants de CM1–CM2 se situent à un <strong>âge charnière</strong> de leur développement :
+        </p>
 
-  <section id="auto-evaluation" class="accent-vert">
-    <h3>Auto-évaluation</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+        <ul class="list">
+          <li>ils développent davantage leur affirmation de soi,</li>
+          <li>les relations entre pairs prennent une place centrale,</li>
+          <li>les désaccords sont plus fréquents et parfois plus complexes à gérer.</li>
+        </ul>
 
-  <section id="conclusion" class="accent-orange">
-    <h3>Conclusion</h3>
-    <p>À compléter.</p>
-    <a class="back" href="#top">↑ Retour sommaire</a>
-  </section>
+        <p style="margin:12px 0;">
+          Ces éléments en font un public particulièrement pertinent pour travailler autour
+          de l’<strong>expression des émotions</strong>, de l’<strong>empathie</strong>, de la
+          <strong>coopération</strong> et du <strong>vivre-ensemble</strong>.
+        </p>
 
- 
+        <p style="margin:0 0 12px;">
+          Par ailleurs, j’ai choisi d’inscrire mon projet sur les <strong>temps périscolaires</strong>
+          plutôt que sur les temps d’ALSH. Ce choix s’explique par la volonté de toucher un
+          public plus large et plus diversifié, les temps périscolaires permettant de réunir
+          un plus grand nombre d’enfants que les temps de centre de loisirs.
+        </p>
 
-</div>
+        <p style="margin:0 0 10px;">
+          La mise en place d’une <strong>pièce de théâtre / comédie musicale</strong> sur ces temps
+          favorise également :
+        </p>
+
+        <ul class="list">
+          <li>une continuité éducative avec le temps scolaire,</li>
+          <li>une valorisation du travail des enfants auprès de leurs pairs et des familles,</li>
+          <li>un impact plus large du projet au sein de la vie de l’école et de la commune.</li>
+        </ul>
+
+        <p style="margin:12px 0 0;">
+          Ce cadre permet ainsi de donner au projet une <strong>dimension collective,
+          visible et fédératrice</strong>, tout en répondant aux problématiques identifiées
+          sur le terrain.
+        </p>
+      </div>
+
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="exemple-constat" class="accent-rouge">
+      <h3>Exemple de constat</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="schema-bulles" class="accent-cyan">
+      <h3>Le schéma des bulles</h3>
+      <p>À compléter (image ou schéma).</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="methodes-pedagogiques" class="accent-vert">
+      <h3>Méthodes pédagogiques</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="construction-cycles" class="accent-violet">
+      <h3>La construction des cycles</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="presentation-activites" class="accent-orange">
+      <h3>Présentation des activités</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <!-- ✅ Garde UNE SEULE fois ce bloc tableau-objectifs -->
+    <section id="tableau-objectifs" class="accent-cyan">
+      <h3>Tableau des objectifs</h3>
+      <p>Modèle prêt à remplir (tu pourras compléter plus tard).</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Séances</th>
+              <th>Objectif principal</th>
+              <th>Indicateurs (observables)</th>
+              <th>Outils / activités</th>
+              <th>Évaluation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="cycle-badge">
+                  <span class="cycle-dot dot-violet"></span>
+                  Séance n°1
+                </span>
+              </td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>Mot du jour / météo</td>
+            </tr>
+
+            <tr>
+              <td>
+                <span class="cycle-badge">
+                  <span class="cycle-dot dot-cyan"></span>
+                  Séance n°2
+                </span>
+              </td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>Thermomètre + retour groupe</td>
+            </tr>
+
+            <tr>
+              <td>
+                <span class="cycle-badge">
+                  <span class="cycle-dot dot-rouge"></span>
+                  Séance n°3
+                </span>
+              </td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>À compléter</td>
+              <td>Auto-évaluation + observation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="cycle-1" class="accent-violet">
+      <h3>1er cycle : 6 séances</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="cycle-2" class="accent-cyan">
+      <h3>2e cycle : 6 séances</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="cycle-3" class="accent-rouge">
+      <h3>3e cycle : 6 séances</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="auto-evaluation" class="accent-vert">
+      <h3>Auto-évaluation</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+    <section id="conclusion" class="accent-orange">
+      <h3>Conclusion</h3>
+      <p>À compléter.</p>
+      <a class="back" href="#top">↑ Retour sommaire</a>
+    </section>
+
+  </div><!-- ✅ fin container -->
+
+ <script>
+  if (new URLSearchParams(location.search).get("pdf") === "1") {
+    const paged = document.createElement("script");
+    paged.src = "https://unpkg.com/pagedjs/dist/paged.polyfill.js";
+    document.body.appendChild(paged);
+
+    paged.onload = () => {
+      const toc = document.createElement("script");
+      toc.src = "scripts/paged-toc.js";
+      document.body.appendChild(toc);
+    };
+  }
+</script>
+
 </body>
 </html>
